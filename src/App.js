@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './Header';
+
+//Componente --> Função que retorna algum conteúdo tipo: HTML, CSS ou JavaScript
+//Propiedade --> Informações que o componente pai passa para um componente filho.
+//Estado --> Informações mantidas pelo componente (Lembrar: imutabilidade)
 
 function App() {
+  const [counter, setCounter] = useState(0);
+
+  function incrementaContador() {
+    setCounter(counter+1);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      < Header title='Fernando' />
+      <h1>Contador: {counter}</h1>
+      <button onClick={incrementaContador}>Incrementar</button>
+    </>
   );
 }
 
