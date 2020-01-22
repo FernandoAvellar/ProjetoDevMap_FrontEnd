@@ -1,23 +1,40 @@
-import React, { useState } from 'react';
-import Header from './Header';
-
-/* Componente --> Função que retorna algum conteúdo tipo: HTML, CSS ou JavaScript. Bloco isolado
-de HTML que não interfere no restante da aplicação. */
-//Propriedade --> Informações que o componente pai passa para um componente filho. Como os atributos do HTML.
-//Estado --> Informações mantidas pelo componente (Lembrar: imutabilidade)
+import React from 'react';
+import './global.css'
+import './Main.css'
+import './App.css'
+import './Sidebar.css'
 
 function App() {
-  const [counter, setCounter] = useState(0);
-
-  function incrementaContador() {
-    setCounter(counter+1);
-  }
   return (
-    <> 
-      < Header title='Fernando' />
-      <h1>Contador: {counter}</h1>
-      <button onClick={incrementaContador}>Incrementar</button>
-    </>
+    <div id="app">
+      <aside>
+        <strong>Cadastrar</strong>
+          <form>
+            <div className="input-block">
+              <label htmlFor="github_username">Usuário do GitHub</label>
+              <input name="github_username" id="github_username" required></input>
+            </div>
+            <div className="input-block">
+              <label htmlFor="techs">Tecnologias</label>
+              <input name="techs" id="techs" required></input>
+            </div>
+            <div className="input-group">
+              <div className="input-block">
+                <label htmlFor="latitude">Latitude</label>
+                <input name="latitude" id="latitude" required></input>
+              </div>
+              <div className="input-block">
+                <label htmlFor="longitude">Longitude</label>
+                <input name="longitude" id="longitude" required></input>
+              </div>
+            </div>
+            <button type="submit">Salvar</button>
+          </form>
+      </aside>
+      <main>
+
+      </main>
+    </div>
   );
 }
 
