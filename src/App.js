@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import api from './services/api'
+
 import './global.css'
 import './Main.css'
 import './App.css'
 import './Sidebar.css'
 
 function App() {
+  const [devs, setDevs] = useState([]);
   const [github_username, setGithubUsername] = useState('');
   const [techs, setTechs] = useState('');
   const [latitude, setLatitude] = useState('');
@@ -27,9 +30,30 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    async function loadDevs() {
+      const response = await api.get('/devs');
+      setDevs(response.data);
+    } 
+    loadDevs(); 
+  }, []);
+
   async function handleAddDev(e) {
     e.preventDefault();
-    console.log(github_username, techs, latitude, longitude);
+    
+    const response = await api.post('/devs', {
+        github_username,
+        techs,
+        latitude,
+        longitude,
+    });
+
+    setGithubUsername('');
+    setTechs('');
+
+    if(response.status === 201) {
+      setDevs([...devs, response.data]);
+    }
   }
 
   return (
@@ -86,50 +110,19 @@ function App() {
       </aside>
       <main>
         <ul>
-          <li className="dev-item">
+          {devs.map(dev => (
+            <li key={dev._id} className="dev-item">
             <header>
-              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
+              <img src={dev.avatar_url} alt={dev.name}></img>
               <div className="user-info">
-                <strong>Fernando Avellar</strong>
-                <span>ReactJS, Node.js, Java</span>
+                <strong>{dev.name}</strong>
+                <span>{dev.techs.join(', ')}</span>
               </div>
             </header>
-            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
-            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
+            <p>{dev.bio}</p>
+            <a href={`https://github.com/${dev.github_username}`} target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
           </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
-              <div className="user-info">
-                <strong>Fernando Avellar</strong>
-                <span>ReactJS, Node.js, Java</span>
-              </div>
-            </header>
-            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
-            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
-              <div className="user-info">
-                <strong>Fernando Avellar</strong>
-                <span>ReactJS, Node.js, Java</span>
-              </div>
-            </header>
-            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
-            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
-              <div className="user-info">
-                <strong>Fernando Avellar</strong>
-                <span>ReactJS, Node.js, Java</span>
-              </div>
-            </header>
-            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
-            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
-          </li>
+          ))}
         </ul>
       </main>
     </div>
