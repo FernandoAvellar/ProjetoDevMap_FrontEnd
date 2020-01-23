@@ -13,7 +13,7 @@ function App() {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
 
-  //Roda sempre ao carregar esse componente e armazana a posição do usuário
+  //Roda sempre ao carregar esse componente e armazena as cordenadas do usuário.
   useEffect(() => {  
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -30,6 +30,7 @@ function App() {
     );
   }, []);
 
+  //Roda sempre ao carregar esse componente e renderiza os Devs na tela.
   useEffect(() => {
     async function loadDevs() {
       const response = await api.get('/devs');
@@ -38,6 +39,7 @@ function App() {
     loadDevs(); 
   }, []);
 
+  //Função chamada sempre que se deseja salvar um novo Dev.
   async function handleAddDev(e) {
     e.preventDefault();
     
