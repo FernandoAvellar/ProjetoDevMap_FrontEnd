@@ -32,7 +32,52 @@ function App() {
           </form>
       </aside>
       <main>
-
+        <ul>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
+              <div className="user-info"> 
+                <strong>Fernando Avellar</strong>
+                <span>ReactJS, Node.js, Java</span>
+              </div>
+            </header>
+            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
+            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
+              <div className="user-info"> 
+                <strong>Fernando Avellar</strong>
+                <span>ReactJS, Node.js, Java</span>
+              </div>
+            </header>
+            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
+            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
+              <div className="user-info"> 
+                <strong>Fernando Avellar</strong>
+                <span>ReactJS, Node.js, Java</span>
+              </div>
+            </header>
+            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
+            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
+          </li>
+          <li className="dev-item">
+            <header>
+              <img src="https://avatars2.githubusercontent.com/u/17768309?v=4" alt="Fernando Avellar"></img>
+              <div className="user-info"> 
+                <strong>Fernando Avellar</strong>
+                <span>ReactJS, Node.js, Java</span>
+              </div>
+            </header>
+            <p>Engenheiro de Telecomunicações apaixonado pelo mercado de TI e por novas tecnologias de desenvolvimento WEB e Mobile.</p>
+            <a href="https://github.com/FernandoAvellar" target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
+          </li>
+        </ul>
       </main>
     </div>
   );
