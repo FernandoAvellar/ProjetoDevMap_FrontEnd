@@ -14,7 +14,7 @@ function App() {
   const [longitude, setLongitude] = useState('');
 
   //Roda sempre ao carregar esse componente e armazena as cordenadas do usuário.
-  useEffect(() => {  
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -35,26 +35,34 @@ function App() {
     async function loadDevs() {
       const response = await api.get('/devs');
       setDevs(response.data);
-    } 
-    loadDevs(); 
+    }
+    loadDevs();
   }, []);
 
   //Função chamada sempre que se deseja salvar um novo Dev.
   async function handleAddDev(e) {
     e.preventDefault();
-    
+
     const response = await api.post('/devs', {
-        github_username,
-        techs,
-        latitude,
-        longitude,
+      github_username,
+      techs,
+      latitude,
+      longitude,
     });
 
     setGithubUsername('');
     setTechs('');
 
-    if(response.status === 201) {
+    if (response.status === 201) {
       setDevs([...devs, response.data]);
+    }
+  }
+
+  async function handleDeleteDev(github_username) {
+    const response = await api.delete(`/devs?github_username=${github_username}`)
+
+    if (response.status === 200) {
+      setDevs(devs.filter(d => d.github_username !== github_username));
     }
   }
 
@@ -65,19 +73,19 @@ function App() {
         <form onSubmit={handleAddDev}>
           <div className="input-block">
             <label htmlFor="github_username">Usuário do GitHub</label>
-            <input 
-              name="github_username" 
-              id="github_username" 
-              required 
+            <input
+              name="github_username"
+              id="github_username"
+              required
               value={github_username}
               onChange={e => setGithubUsername(e.target.value)}
             />
           </div>
           <div className="input-block">
             <label htmlFor="techs">Tecnologias</label>
-            <input 
-              name="techs" 
-              id="techs" 
+            <input
+              name="techs"
+              id="techs"
               required
               value={techs}
               onChange={e => setTechs(e.target.value)}
@@ -114,21 +122,22 @@ function App() {
         <ul>
           {devs.map(dev => (
             <li key={dev._id} className="dev-item">
-            <header>
-              <img src={dev.avatar_url} alt={dev.name}></img>
-              <div className="user-info">
-                <strong>{dev.name}</strong>
-                <span>{dev.techs.join(', ')}</span>
-              </div>
-            </header>
-            <p>{dev.bio}</p>
-            <a href={`https://github.com/${dev.github_username}`} target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
-          </li>
+              <header>
+                <img src={dev.avatar_url} alt={dev.name}></img>
+                <div className="user-info">
+                  <strong>{dev.name}</strong>
+                  <span>{dev.techs.join(', ')}</span>
+                </div>
+              </header>
+              <p>{dev.bio}</p>
+              <a href={`https://github.com/${dev.github_username}`} target="_blank" rel="noopener noreferrer">Acessar perfil no Github</a>
+              <button type="text" onClick={() => handleDeleteDev(dev.github_username)}>Remover</button>
+            </li>
           ))}
         </ul>
       </main>
     </div>
   );
-}
+};
 
 export default App;
